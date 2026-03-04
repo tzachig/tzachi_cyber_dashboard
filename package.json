@@ -1,0 +1,21 @@
+{
+  "name": "hello-world-confetti",
+  "version": "1.0.0",
+  "description": "A hello world app with confetti animation",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {},
+  "keywords": ["hello-world", "confetti", "react", "express"],
+  "author": "Tzachi",
+  "license": "MIT"
+}
