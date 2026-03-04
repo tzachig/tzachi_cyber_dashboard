@@ -21,27 +21,7 @@ app.get('/', (req, res) => {
       <title>Hello World Confetti</title>
       <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body>
-      <div id="root"></div>
-      <script>
-        // Confetti animation
-        function generateConfetti() {
-          for (let i = 0; i < 100; i++) {
-            const confetti = document.createElement('div');
-            confetti.className = 'confetti';
-            confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.backgroundColor = \`hsl(\${Math.random() * 360}, 100%, 50%)\`;
-            confetti.style.animation = \`fall \${2 + Math.random() * 1}s linear forwards\`;
-            document.body.appendChild(confetti);
-          }
-          setTimeout(() => {
-            document.querySelectorAll('.confetti').forEach(el => el.remove());
-          }, 3000);
-        }
-        
-        // Auto-trigger on load
-        window.addEventListener('load', generateConfetti);
-      </script>
+    <body style="margin: 0; padding: 0;">
       <style>
         @keyframes fall {
           to {
@@ -49,28 +29,66 @@ app.get('/', (req, res) => {
             opacity: 0;
           }
         }
-        .confetti {
+        .confetti-particle {
           position: fixed;
-          width: 10px;
-          height: 10px;
+          width: 12px;
+          height: 12px;
           border-radius: 50%;
           pointer-events: none;
           z-index: 9999;
+          top: 0;
         }
       </style>
+      
       <div class="min-h-screen bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center">
         <div class="text-center">
           <h1 class="text-6xl font-bold text-white mb-4 drop-shadow-lg">Hello World! 🎉</h1>
           <p class="text-2xl text-white mb-8 drop-shadow-lg">Welcome to your confetti celebration app</p>
-          <button onclick="generateConfetti()" class="px-8 py-4 bg-white text-purple-600 font-bold rounded-lg shadow-lg hover:bg-gray-100 transition transform hover:scale-105">
+          <button id="confetti-btn" class="px-8 py-4 bg-white text-purple-600 font-bold rounded-lg shadow-lg hover:bg-gray-100 transition transform hover:scale-105 cursor-pointer">
             🎊 Launch Confetti
           </button>
           <div class="mt-16 text-white text-lg drop-shadow-lg">
             <p>Built with Express & Vercel</p>
-            <p class="mt-2 text-sm opacity-90">Click the button or reload to see confetti!</p>
+            <p class="mt-2 text-sm opacity-90">Click the button to see confetti!</p>
           </div>
         </div>
       </div>
+
+      <script>
+        function generateConfetti() {
+          console.log('🎉 Confetti launched!');
+          
+          for (let i = 0; i < 100; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti-particle';
+            confetti.style.left = Math.random() * 100 + '%';
+            
+            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#FFD93D', '#6BCB77'];
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            const duration = 2 + Math.random() * 1.5;
+            confetti.style.animation = \`fall \${duration}s linear forwards\`;
+            
+            document.body.appendChild(confetti);
+            
+            // Remove confetti after animation
+            setTimeout(() => {
+              confetti.remove();
+            }, duration * 1000);
+          }
+        }
+        
+        // Button click handler
+        document.getElementById('confetti-btn').addEventListener('click', function(e) {
+          e.preventDefault();
+          generateConfetti();
+        });
+        
+        // Auto-trigger on page load
+        window.addEventListener('load', function() {
+          generateConfetti();
+        });
+      </script>
     </body>
     </html>
   `);
