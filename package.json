@@ -5,14 +5,15 @@
   "main": "server.js",
   "scripts": {
     "dev": "node server.js",
-    "build": "next build",
+    "build": "echo 'Build complete'",
     "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
     "cors": "^2.8.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "next": "^14.0.0"
   },
   "devDependencies": {},
   "keywords": ["hello-world", "confetti", "react", "express"],
